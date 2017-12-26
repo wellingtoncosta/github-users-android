@@ -1,8 +1,17 @@
 package br.com.wellingtoncosta.githubusers.ui.search;
 
-/**
- * Created by Wellington Costa on 26/12/2017.
- */
+import android.view.View;
 
-public class SearchUsersViewHolder {
+import br.com.wellingtoncosta.githubusers.databinding.ListUsersItemBinding;
+import br.com.wellingtoncosta.githubusers.ui.base.BaseViewHolder;
+
+/**
+ * @author Wellington Costa on 26/12/2017.
+ */
+public class SearchUsersViewHolder extends BaseViewHolder<ListUsersItemBinding> {
+
+    public SearchUsersViewHolder(View view) {
+        super(view);
+    }
+
 }
