@@ -3,6 +3,7 @@ package br.com.wellingtoncosta.githubusers.ui.base;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +12,10 @@ import java.util.List;
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     protected List<T> list;
+
+    protected BaseAdapter() {
+        this.list = new ArrayList<>();
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,7 +45,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
         return list.get(position);
     }
 
-    public List<T> getDataList() {
+    public List<T> getList() {
         return list;
     }
 

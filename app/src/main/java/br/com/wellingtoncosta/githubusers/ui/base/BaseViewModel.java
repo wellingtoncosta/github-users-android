@@ -23,4 +23,5 @@ public abstract class BaseViewModel<T> extends ViewModel {
     public MutableLiveData<Boolean> getLoadingStatus() {
         return loadingStatus;
     }
+
 }
