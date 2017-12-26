@@ -33,6 +33,7 @@
             android:textColor="@color/colorPrimaryText"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginBottom="6dp"
             app:layout_constraintBottom_toBottomOf="@+id/image"
             app:layout_constraintLeft_toRightOf="@+id/image"
             app:layout_constraintRight_toRightOf="parent"

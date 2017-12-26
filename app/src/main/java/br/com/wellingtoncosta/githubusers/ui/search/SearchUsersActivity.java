@@ -4,8 +4,11 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
+
+import java.util.Collections;
 
 import javax.inject.Inject;
 
@@ -69,6 +72,9 @@ public class SearchUsersActivity extends DaggerAppCompatActivity {
             if(response != null && response.status == Status.SUCCESS) {
                 binding.setUsers(response.data);
                 binding.executePendingBindings();
+            } else {
+                binding.setUsers(Collections.emptyList());
+                Snackbar.make(binding.recyclerView, R.string.load_data_failure, Snackbar.LENGTH_LONG).show();
             }
         });
     }
