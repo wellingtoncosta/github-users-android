@@ -13,22 +13,22 @@ import retrofit2.http.Path;
  */
 public interface GitHubApi {
 
-    @GET
+    @GET("users")
     Observable<List<User>> getUsers();
 
-    @GET("{username}")
+    @GET("users/{username}")
     Observable<User> getUser(@Path("{username}") String username);
 
-    @GET("{username}/followres")
+    @GET("users/{username}/followres")
     Observable<List<User>> getFollowers(@Path("{username}") String username);
 
-    @GET("{username}/following")
+    @GET("users/{username}/following")
     Observable<List<User>> getFollowing(@Path("{username}") String username);
 
-    @GET("{username}/repos")
+    @GET("users/{username}/repos")
     Observable<List<Repo>> getRepos(@Path("{username}") String username);
 
-    @GET("{username}/starred")
+    @GET("users/{username}/starred")
     Observable<List<Repo>> getStarredRepos(@Path("{username}") String username);
 
 }
