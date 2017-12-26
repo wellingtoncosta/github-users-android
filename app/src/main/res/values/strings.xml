@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GitHub Users Android</string>
+    <string name="search_users">Buscar Usuários</string>
 </resources>
