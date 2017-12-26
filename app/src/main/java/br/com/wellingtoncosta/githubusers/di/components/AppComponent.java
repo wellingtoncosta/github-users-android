@@ -2,6 +2,7 @@ package br.com.wellingtoncosta.githubusers.di.components;
 
 import javax.inject.Singleton;
 
+import br.com.wellingtoncosta.githubusers.di.modules.ActivityBuildersModule;
 import br.com.wellingtoncosta.githubusers.di.modules.AppModule;
 import br.com.wellingtoncosta.githubusers.di.modules.NetworkModule;
 import br.com.wellingtoncosta.githubusers.ui.App;
@@ -15,6 +16,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Singleton
 @Component(modules = {
         AndroidSupportInjectionModule.class,
+        ActivityBuildersModule.class,
         AppModule.class,
         NetworkModule.class
 })
