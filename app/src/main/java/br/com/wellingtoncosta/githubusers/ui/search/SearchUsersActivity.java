@@ -6,7 +6,10 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.Collections;
 
@@ -15,6 +18,7 @@ import br.com.wellingtoncosta.githubusers.data.remote.response.Status;
 import br.com.wellingtoncosta.githubusers.databinding.ActivitySearchUsersBinding;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseActivity;
 import br.com.wellingtoncosta.githubusers.ui.details.UserDetailsActivity;
+import br.com.wellingtoncosta.githubusers.util.Messages;
 
 /**
  * @author Wellington Costa on 26/12/2017.
@@ -35,6 +39,36 @@ public class SearchUsersActivity extends BaseActivity<SearchUsersViewModel> {
         binding.includeContent.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.includeContent.recyclerView.setAdapter(new SearchUsersAdapter(onItemClickListener));
         binding.includeContent.swipeContainer.setOnRefreshListener(viewModel::loadUsers);
+        setupSearchView();
+    }
+
+    private void setupSearchView() {
+        setSupportActionBar(binding.includeToolbar.toolbar);
+
+        binding.includeToolbar.searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() { }
+
+            @Override
+            public void onSearchViewClosed() {
+                if(((SearchUsersAdapter)binding.includeContent.recyclerView.getAdapter()).getList().size() <= 1) {
+                    viewModel.loadUsers();
+                }
+            }
+        });
+
+        binding.includeToolbar.searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                viewModel.loadUser(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        });
     }
 
     @Override
@@ -47,7 +81,34 @@ public class SearchUsersActivity extends BaseActivity<SearchUsersViewModel> {
         super.onPostCreate(savedInstanceState);
         observeLoadingStatus();
         observeResponse();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (binding.includeToolbar.searchView.isSearchOpen()) {
+            binding.includeToolbar.searchView.closeSearch();
+        }
+
         viewModel.loadUsers();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        binding.includeToolbar.searchView.setMenuItem(item);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (binding.includeToolbar.searchView.isSearchOpen()) {
+            binding.includeToolbar.searchView.closeSearch();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     public void observeLoadingStatus() {
@@ -59,15 +120,12 @@ public class SearchUsersActivity extends BaseActivity<SearchUsersViewModel> {
 
     public void observeResponse() {
         viewModel.getResponse().observe(this, response -> {
-            if (response != null) {
-                if(response.status == Status.SUCCESS) {
-                    binding.includeContent.setUsers(response.data);
-                    binding.executePendingBindings();
-                } else {
-                    binding.includeContent.setUsers(Collections.emptyList());
-                    showLongSnackbar(binding.getRoot(), R.string.load_data_failure);
-                    Log.e("get users error", response.throwable.getMessage());
-                }
+            if(response != null && response.status == Status.SUCCESS) {
+                binding.includeContent.setUsers(response.data);
+                binding.executePendingBindings();
+            } else if (response != null && response.status == Status.ERROR) {
+                binding.includeContent.setUsers(Collections.emptyList());
+                showLongSnackbar(binding.getRoot(), Messages.getErrorMessage(response.throwable));
             }
         });
     }

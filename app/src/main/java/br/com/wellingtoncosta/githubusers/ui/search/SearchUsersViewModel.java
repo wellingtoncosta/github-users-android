@@ -1,7 +1,6 @@
 package br.com.wellingtoncosta.githubusers.ui.search;
 
-import android.util.Log;
-
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,7 +24,6 @@ public class SearchUsersViewModel extends BaseViewModel<List<User>> {
         this.repository = repository;
     }
 
-
     void loadUsers() {
         repository.getUsers()
                 .subscribeOn(Schedulers.newThread())
@@ -34,6 +32,18 @@ public class SearchUsersViewModel extends BaseViewModel<List<User>> {
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(
                         users -> response.setValue(Response.success(users)),
+                        throwable -> response.setValue(Response.error(throwable))
+                );
+    }
+
+    void loadUser(String username) {
+        repository.getUser(username)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(s -> loadingStatus.setValue(true))
+                .doAfterTerminate(() -> loadingStatus.setValue(false))
+                .subscribe(
+                        user -> response.setValue(Response.success(Collections.singletonList(user))),
                         throwable -> response.setValue(Response.error(throwable))
                 );
     }

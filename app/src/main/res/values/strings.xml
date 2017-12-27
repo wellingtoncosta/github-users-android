@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">GitHub Users Android</string>
     <string name="back_button">Voltar</string>
+    <string name="limit_requests_exceeded">Limite de 60 requisições excedido</string>
     <string name="fork_icon">Icone de Fork</string>
     <string name="load_data_failure">Falha ao tentar carregar os dados</string>
     <string name="location">Localização</string>
     <string name="repositories">Repositórios</string>
     <string name="search_users">Buscar Usuários</string>
+    <string name="server_connection_error">Falha na comunicação com o servidor</string>
     <string name="stars">Estrelas</string>
     <string name="star_icon">Icone de Estrela</string>
 </resources>

@@ -13,6 +13,7 @@ import br.com.wellingtoncosta.githubusers.ui.base.BaseActivity;
 import br.com.wellingtoncosta.githubusers.ui.common.ViewPagerAdapter;
 import br.com.wellingtoncosta.githubusers.ui.details.repos.ListReposFragment;
 import br.com.wellingtoncosta.githubusers.ui.details.starreds.ListStarredReposFragment;
+import br.com.wellingtoncosta.githubusers.util.Messages;
 
 /**
  * @author Wellington Costa on 26/12/2017.
@@ -60,9 +61,9 @@ public class UserDetailsActivity extends BaseActivity<UserDetailsViewModel> {
                 binding.setUser(response.data);
                 binding.setOnBackButtonClickListener(this::finish);
                 binding.executePendingBindings();
-            } else {
+            } else if (response != null && response.status == Status.ERROR) {
                 binding.setUser(new User());
-                showLongSnackbar(binding.getRoot(), R.string.load_data_failure);
+                showLongSnackbar(binding.getRoot(), Messages.getErrorMessage(response.throwable));
             }
         });
     }
