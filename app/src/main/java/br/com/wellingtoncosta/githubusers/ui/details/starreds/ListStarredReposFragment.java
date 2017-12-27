@@ -6,16 +6,20 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.Collections;
 
 import javax.inject.Inject;
 
 import br.com.wellingtoncosta.githubusers.R;
 import br.com.wellingtoncosta.githubusers.data.remote.response.Status;
 import br.com.wellingtoncosta.githubusers.databinding.FragmentListStarredReposBinding;
+import br.com.wellingtoncosta.githubusers.util.Messages;
 import dagger.android.support.DaggerFragment;
 
 /**
@@ -78,6 +82,9 @@ public class ListStarredReposFragment extends DaggerFragment {
             if(response != null && response.status == Status.SUCCESS) {
                 binding.setRepos(response.data);
                 binding.executePendingBindings();
+            } else if (response != null && response.status == Status.ERROR) {
+                binding.setRepos(Collections.emptyList());
+                Snackbar.make(binding.getRoot(), Messages.getErrorMessage(response.throwable), Snackbar.LENGTH_LONG).show();
             }
         });
     }
