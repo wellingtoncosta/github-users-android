@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui.base;
+package br.com.wellingtoncosta.githubusers.ui.common;
 
 import android.databinding.BindingAdapter;
 

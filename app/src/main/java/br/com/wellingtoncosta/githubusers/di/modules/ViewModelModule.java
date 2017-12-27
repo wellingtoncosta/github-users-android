@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
 import br.com.wellingtoncosta.githubusers.di.keys.ViewModelKey;
-import br.com.wellingtoncosta.githubusers.ui.ViewModelFactory;
+import br.com.wellingtoncosta.githubusers.ui.common.ViewModelFactory;
 import br.com.wellingtoncosta.githubusers.ui.details.UserDetailsViewModel;
 import br.com.wellingtoncosta.githubusers.ui.search.SearchUsersViewModel;
 import dagger.Binds;

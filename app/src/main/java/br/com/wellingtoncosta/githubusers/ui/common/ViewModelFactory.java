@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui;
+package br.com.wellingtoncosta.githubusers.ui.common;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
@@ -21,8 +21,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         this.creators = creators;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(Class<T> modelClass) {
         Provider<? extends ViewModel> creator = creators.get(modelClass);
         if (creator == null) {

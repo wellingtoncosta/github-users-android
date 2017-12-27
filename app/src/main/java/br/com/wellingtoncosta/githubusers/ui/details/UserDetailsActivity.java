@@ -45,11 +45,11 @@ public class UserDetailsActivity extends BaseActivity<UserDetailsViewModel> {
         viewModel.getResponse().observe(this, response -> {
             if(response != null && response.status == Status.SUCCESS) {
                 Log.d("user details", new Gson().toJson(response.data));
-                binding.includeToolbar.setUser(response.data.user);
-                binding.includeToolbar.setOnBackButtonClickListener(this::finish);
+                binding.setUser(response.data.user);
+                binding.setOnBackButtonClickListener(this::finish);
                 binding.executePendingBindings();
             } else {
-                binding.includeToolbar.setUser(new User());
+                binding.setUser(new User());
                 showLongSnackbar(binding.getRoot(), R.string.load_data_failure);
             }
         });
