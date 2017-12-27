@@ -13,6 +13,9 @@ import br.com.wellingtoncosta.githubusers.data.remote.response.Status;
 import br.com.wellingtoncosta.githubusers.databinding.ActivityUserDetailsBinding;
 import br.com.wellingtoncosta.githubusers.domain.model.User;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseActivity;
+import br.com.wellingtoncosta.githubusers.ui.common.ViewPagerAdapter;
+import br.com.wellingtoncosta.githubusers.ui.details.repository.ListRepositoriesFragment;
+import br.com.wellingtoncosta.githubusers.ui.details.star.ListStarsFragment;
 
 /**
  * @author Wellington Costa on 26/12/2017.
@@ -24,6 +27,17 @@ public class UserDetailsActivity extends BaseActivity<UserDetailsViewModel> {
     @Override
     public void setupViews() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_details);
+        setupTabs();
+    }
+
+    private void setupTabs() {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        adapter.addFragment(new ListRepositoriesFragment(), getString(R.string.repositories));
+        adapter.addFragment(new ListStarsFragment(), getString(R.string.stars));
+
+        binding.viewPager.setAdapter(adapter);
+        binding.tabs.setupWithViewPager(binding.viewPager);
     }
 
     @Override
@@ -45,7 +59,7 @@ public class UserDetailsActivity extends BaseActivity<UserDetailsViewModel> {
         viewModel.getResponse().observe(this, response -> {
             if(response != null && response.status == Status.SUCCESS) {
                 Log.d("user details", new Gson().toJson(response.data));
-                binding.setUser(response.data.user);
+                binding.setUser(response.data);
                 binding.setOnBackButtonClickListener(this::finish);
                 binding.executePendingBindings();
             } else {

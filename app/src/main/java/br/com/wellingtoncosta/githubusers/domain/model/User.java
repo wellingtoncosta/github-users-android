@@ -22,6 +22,8 @@ public class User {
     @SerializedName("location")
     private String location;
 
+
+
     public Long getId() {
         return id;
     }

@@ -3,5 +3,10 @@
     <string name="back_button">Voltar</string>
     <string name="load_data_failure">Falha ao tentar carregar os dados</string>
     <string name="location">Localização</string>
+    <string name="repositories">Repositórios</string>
     <string name="search_users">Buscar Usuários</string>
+    <string name="stars">Estrelas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
