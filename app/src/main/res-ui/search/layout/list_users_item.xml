@@ -27,7 +27,7 @@
             tools:placeholderImage="@drawable/ic_launcher" />
 
         <TextView
-            android:id="@+id/full_name"
+            android:id="@+id/username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="1"

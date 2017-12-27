@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:scrollbars="vertical"
-                app:load_repos="@{repos}" />
+                app:load_starred_repos="@{repos}" />
         </android.support.v4.widget.SwipeRefreshLayout>
 
     </android.support.design.widget.CoordinatorLayout>

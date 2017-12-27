@@ -14,7 +14,7 @@ public interface ActivityBuildersModule {
     @ContributesAndroidInjector
     SearchUsersActivity contributeSearchUsersActivity();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = {FragmentBuildersModule.class})
     UserDetailsActivity contributeUserDetailsActivity();
 
 }

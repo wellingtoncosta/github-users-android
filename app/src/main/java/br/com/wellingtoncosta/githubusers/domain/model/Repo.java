@@ -25,6 +25,9 @@ public class Repo {
     @SerializedName("forks_count")
     private Long forksCount;
 
+    @SerializedName("owner")
+    private RepoOwner owner;
+
     public Long getId() {
         return id;
     }
@@ -71,6 +74,14 @@ public class Repo {
 
     public void setForksCount(Long forksCount) {
         this.forksCount = forksCount;
+    }
+
+    public RepoOwner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(RepoOwner owner) {
+        this.owner = owner;
     }
 
 }

@@ -29,6 +29,9 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.13'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.13'
 
+    // Material Search View
+    implementation 'com.miguelcatalan:materialsearchview:1.4.0'
+
     // Unit and UI Tests
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
