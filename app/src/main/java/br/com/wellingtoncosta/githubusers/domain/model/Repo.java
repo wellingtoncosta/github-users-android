@@ -13,8 +13,8 @@ public class Repo {
     @SerializedName("name")
     private String name;
 
-    @SerializedName("description")
-    private String description;
+    @SerializedName("full_name")
+    private String fullName;
 
     @SerializedName("language")
     private String language;
@@ -24,9 +24,6 @@ public class Repo {
 
     @SerializedName("forks_count")
     private Long forksCount;
-
-    @SerializedName("owner")
-    private RepoOwner owner;
 
     public Long getId() {
         return id;
@@ -44,12 +41,12 @@ public class Repo {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getLanguage() {
@@ -76,12 +73,8 @@ public class Repo {
         this.forksCount = forksCount;
     }
 
-    public RepoOwner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(RepoOwner owner) {
-        this.owner = owner;
+    public boolean hasLanguage() {
+        return language != null && !language.isEmpty();
     }
 
 }

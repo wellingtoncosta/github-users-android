@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 
 import java.util.Collections;
 
@@ -58,12 +59,15 @@ public class SearchUsersActivity extends BaseActivity<SearchUsersViewModel> {
 
     public void observeResponse() {
         viewModel.getResponse().observe(this, response -> {
-            if(response != null && response.status == Status.SUCCESS) {
-                binding.includeContent.setUsers(response.data);
-                binding.executePendingBindings();
-            } else {
-                binding.includeContent.setUsers(Collections.emptyList());
-                showLongSnackbar(binding.getRoot(), R.string.load_data_failure);
+            if (response != null) {
+                if(response.status == Status.SUCCESS) {
+                    binding.includeContent.setUsers(response.data);
+                    binding.executePendingBindings();
+                } else {
+                    binding.includeContent.setUsers(Collections.emptyList());
+                    showLongSnackbar(binding.getRoot(), R.string.load_data_failure);
+                    Log.e("get users error", response.throwable.getMessage());
+                }
             }
         });
     }

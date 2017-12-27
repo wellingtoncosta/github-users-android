@@ -1,5 +1,7 @@
 package br.com.wellingtoncosta.githubusers.ui.search;
 
+import android.util.Log;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,7 +34,7 @@ public class SearchUsersViewModel extends BaseViewModel<List<User>> {
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(
                         users -> response.setValue(Response.success(users)),
-                        throwable -> response.setValue(Response.error())
+                        throwable -> response.setValue(Response.error(throwable))
                 );
     }
 

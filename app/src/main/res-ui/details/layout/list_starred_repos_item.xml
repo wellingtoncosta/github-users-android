@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
         <import type="br.com.wellingtoncosta.githubusers.domain.model.Repo" />
         <variable name="repo" type="Repo" />
     </data>
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:padding="10dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/name"
@@ -22,10 +23,76 @@
             android:textColor="@color/colorPrimaryText"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="6dp"
+            android:text="@{repo.fullName}"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text='@{repo.owner.username + " / " + repo.name}' />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/language"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="@{repo.hasLanguage() ? View.VISIBLE : View.GONE}"
+            android:text="@{repo.language}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name" />
+
+        <ImageView
+            android:id="@+id/star_icon"
+            android:layout_width="0dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/star_icon"
+            app:srcCompat="@drawable/ic_star"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/language" />
+
+        <TextView
+            android:id="@+id/stargazers_count"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{Long.toString(safeUnbox(repo.stargazersCount))}"
+            app:layout_constraintLeft_toRightOf="@id/star_icon"
+            app:layout_constraintTop_toBottomOf="@id/language" />
+
+        <ImageView
+            android:id="@+id/fork_icon"
+            android:layout_width="0dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/fork_icon"
+            app:srcCompat="@drawable/ic_fork"
+            app:layout_constraintLeft_toRightOf="@id/stargazers_count"
+            app:layout_constraintTop_toBottomOf="@id/language" />
+
+        <TextView
+            android:id="@+id/forks_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{Long.toString(safeUnbox(repo.forksCount))}"
+            app:layout_constraintLeft_toRightOf="@id/fork_icon"
+            app:layout_constraintTop_toBottomOf="@id/language" />
 
     </android.support.constraint.ConstraintLayout>
 

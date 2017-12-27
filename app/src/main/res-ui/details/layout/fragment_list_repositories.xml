@@ -27,6 +27,7 @@
                 android:background="@android:color/transparent"
                 android:scrollbars="vertical"
                 app:load_repos="@{repos}" />
+
         </android.support.v4.widget.SwipeRefreshLayout>
 
     </android.support.design.widget.CoordinatorLayout>

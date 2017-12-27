@@ -29,7 +29,7 @@ public class UserDetailsViewModel extends BaseViewModel<User> {
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(
                         user -> response.setValue(Response.success(user)),
-                        throwable -> response.setValue(Response.error())
+                        throwable -> response.setValue(Response.error(throwable))
                 );
     }
 

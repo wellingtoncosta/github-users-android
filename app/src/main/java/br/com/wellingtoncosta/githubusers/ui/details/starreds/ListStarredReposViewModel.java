@@ -31,7 +31,7 @@ public class ListStarredReposViewModel extends BaseViewModel<List<Repo>> {
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(
                         user -> response.setValue(Response.success(user)),
-                        throwable -> response.setValue(Response.error())
+                        throwable -> response.setValue(Response.error(throwable))
                 );
     }
 
