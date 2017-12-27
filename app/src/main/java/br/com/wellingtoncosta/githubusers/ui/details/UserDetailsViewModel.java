@@ -1,11 +1,12 @@
-package br.com.wellingtoncosta.githubusers.ui.search;
+package br.com.wellingtoncosta.githubusers.ui.details;
 
-import java.util.List;
+import java.util.Collections;
 
 import javax.inject.Inject;
 
 import br.com.wellingtoncosta.githubusers.data.remote.response.Response;
-import br.com.wellingtoncosta.githubusers.domain.model.User;
+import br.com.wellingtoncosta.githubusers.domain.model.UserDetails;
+import br.com.wellingtoncosta.githubusers.domain.repository.RepoRepository;
 import br.com.wellingtoncosta.githubusers.domain.repository.UserRepository;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -14,24 +15,26 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @author Wellington Costa on 26/12/2017.
  */
-public class SearchUsersViewModel extends BaseViewModel<List<User>> {
+public class UserDetailsViewModel extends BaseViewModel<UserDetails> {
 
-    private UserRepository repository;
+    private UserRepository userRepository;
+
+    private RepoRepository repoRepository;
 
     @Inject
-    SearchUsersViewModel(UserRepository repository) {
-        this.repository = repository;
+    UserDetailsViewModel(UserRepository userRepository, RepoRepository repoRepository) {
+        this.userRepository = userRepository;
+        this.repoRepository = repoRepository;
     }
 
-
-    void loadUsers() {
-        repository.getUsers()
+    void loadUserDetails(String username) {
+        userRepository.getUser(username)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(s -> loadingStatus.setValue(true))
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(
-                        users -> response.setValue(Response.success(users)),
+                        user -> response.setValue(Response.success(new UserDetails(user, Collections.emptyList()))),
                         throwable -> response.setValue(Response.error())
                 );
     }

@@ -1,5 +1,6 @@
 package br.com.wellingtoncosta.githubusers.di.modules;
 
+import br.com.wellingtoncosta.githubusers.ui.details.UserDetailsActivity;
 import br.com.wellingtoncosta.githubusers.ui.search.SearchUsersActivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -12,5 +13,8 @@ public interface ActivityBuildersModule {
 
     @ContributesAndroidInjector
     SearchUsersActivity contributeSearchUsersActivity();
+
+    @ContributesAndroidInjector
+    UserDetailsActivity contributeUserDetailsActivity();
 
 }

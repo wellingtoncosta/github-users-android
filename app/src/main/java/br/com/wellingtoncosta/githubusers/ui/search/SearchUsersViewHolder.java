@@ -3,6 +3,7 @@ package br.com.wellingtoncosta.githubusers.ui.search;
 import android.view.View;
 
 import br.com.wellingtoncosta.githubusers.databinding.ListUsersItemBinding;
+import br.com.wellingtoncosta.githubusers.domain.model.User;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseViewHolder;
 
 /**
@@ -10,8 +11,12 @@ import br.com.wellingtoncosta.githubusers.ui.base.BaseViewHolder;
  */
 public class SearchUsersViewHolder extends BaseViewHolder<ListUsersItemBinding> {
 
-    public SearchUsersViewHolder(View view) {
+    SearchUsersViewHolder(View view) {
         super(view);
+    }
+
+    public interface OnItemClickListener {
+        void click(User user);
     }
 
 }

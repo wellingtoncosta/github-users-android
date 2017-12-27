@@ -3,6 +3,7 @@ package br.com.wellingtoncosta.githubusers.di.modules;
 import javax.inject.Singleton;
 
 import br.com.wellingtoncosta.githubusers.data.remote.GitHubApi;
+import br.com.wellingtoncosta.githubusers.domain.repository.RepoRepository;
 import br.com.wellingtoncosta.githubusers.domain.repository.UserRepository;
 import dagger.Module;
 import dagger.Provides;
@@ -24,6 +25,12 @@ public class AppModule {
     @Singleton
     UserRepository provideUserRepository(GitHubApi api) {
         return new UserRepository(api);
+    }
+
+    @Provides
+    @Singleton
+    RepoRepository provideRepoRepository(GitHubApi api) {
+        return new RepoRepository(api);
     }
 
 }

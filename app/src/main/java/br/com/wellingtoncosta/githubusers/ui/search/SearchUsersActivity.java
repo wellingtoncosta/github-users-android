@@ -1,80 +1,69 @@
 package br.com.wellingtoncosta.githubusers.ui.search;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 
 import java.util.Collections;
 
-import javax.inject.Inject;
-
 import br.com.wellingtoncosta.githubusers.R;
 import br.com.wellingtoncosta.githubusers.data.remote.response.Status;
-import br.com.wellingtoncosta.githubusers.databinding.ActivitySearchBinding;
-import dagger.android.support.DaggerAppCompatActivity;
+import br.com.wellingtoncosta.githubusers.databinding.ActivitySearchUsersBinding;
+import br.com.wellingtoncosta.githubusers.ui.base.BaseActivity;
+import br.com.wellingtoncosta.githubusers.ui.details.UserDetailsActivity;
 
 /**
  * @author Wellington Costa on 26/12/2017.
  */
-public class SearchUsersActivity extends DaggerAppCompatActivity {
+public class SearchUsersActivity extends BaseActivity<SearchUsersViewModel> {
 
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    private ActivitySearchUsersBinding binding;
 
-    private SearchUsersViewModel viewModel;
-
-    private ActivitySearchBinding binding;
+    private SearchUsersViewHolder.OnItemClickListener onItemClickListener = (userClicked) -> {
+        Intent intent = new Intent(this, UserDetailsActivity.class);
+        intent.putExtra("username", userClicked.getUsername());
+        startActivity(intent);
+    };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchUsersViewModel.class);
+    public void setupViews() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_search_users);
+        binding.includeContent.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.includeContent.recyclerView.setAdapter(new SearchUsersAdapter(onItemClickListener));
+        binding.includeContent.swipeContainer.setOnRefreshListener(viewModel::loadUsers);
+    }
 
+    @Override
+    public void setupViewModel() {
+        viewModel = ViewModelProviders.of(this, getViewModelFactory()).get(SearchUsersViewModel.class);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
         observeLoadingStatus();
         observeResponse();
-
-        viewModel.loadData();
-
-        setupViews();
-    }
-
-    private void setupViews() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.swipeContainer.setOnRefreshListener(viewModel::loadData);
-        setupToolbar();
-    }
-
-    private void setupToolbar() {
-        if (binding.includeToolbar.toolbar != null) {
-            setSupportActionBar(binding.includeToolbar.toolbar);
-            ActionBar actionBar = getSupportActionBar();
-
-            if (actionBar != null) {
-                actionBar.setTitle(getString(R.string.search_users));
-            }
-        }
+        viewModel.loadUsers();
     }
 
     public void observeLoadingStatus() {
         viewModel.getLoadingStatus().observe(
                 this,
-                isLoading  -> binding.swipeContainer.setRefreshing(isLoading == null ? false : isLoading)
+                isLoading  -> binding.includeContent.swipeContainer.setRefreshing(isLoading == null ? false : isLoading)
         );
     }
 
     public void observeResponse() {
         viewModel.getResponse().observe(this, response -> {
             if(response != null && response.status == Status.SUCCESS) {
-                binding.setUsers(response.data);
+                binding.includeContent.setUsers(response.data);
                 binding.executePendingBindings();
             } else {
-                binding.setUsers(Collections.emptyList());
-                Snackbar.make(binding.recyclerView, R.string.load_data_failure, Snackbar.LENGTH_LONG).show();
+                binding.includeContent.setUsers(Collections.emptyList());
+                showLongSnackbar(binding.getRoot(), R.string.load_data_failure);
             }
         });
     }

@@ -4,8 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import br.com.wellingtoncosta.githubusers.R;
 import br.com.wellingtoncosta.githubusers.databinding.ListUsersItemBinding;
 import br.com.wellingtoncosta.githubusers.domain.model.User;
@@ -16,8 +14,11 @@ import br.com.wellingtoncosta.githubusers.ui.base.BaseAdapter;
  */
 public class SearchUsersAdapter extends BaseAdapter<User> {
 
-    SearchUsersAdapter(List<User> users) {
-        this.list = users;
+    private SearchUsersViewHolder.OnItemClickListener onItemClickListener;
+
+    SearchUsersAdapter(SearchUsersViewHolder.OnItemClickListener onItemClickListener) {
+        super();
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -32,6 +33,7 @@ public class SearchUsersAdapter extends BaseAdapter<User> {
         ListUsersItemBinding binding = ((SearchUsersViewHolder)holder).getBinding();
         User user = list.get(position);
         binding.setUser(user);
+        binding.setOnItemClickListener(onItemClickListener);
     }
 
 }

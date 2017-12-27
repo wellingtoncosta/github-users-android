@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider;
 
 import br.com.wellingtoncosta.githubusers.di.keys.ViewModelKey;
 import br.com.wellingtoncosta.githubusers.ui.ViewModelFactory;
+import br.com.wellingtoncosta.githubusers.ui.details.UserDetailsViewModel;
 import br.com.wellingtoncosta.githubusers.ui.search.SearchUsersViewModel;
 import dagger.Binds;
 import dagger.Module;
@@ -20,6 +21,11 @@ public interface ViewModelModule {
     @IntoMap
     @ViewModelKey(SearchUsersViewModel.class)
     ViewModel bindSearchUsersViewModel(SearchUsersViewModel searchUsersViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserDetailsViewModel.class)
+    ViewModel bindUserDetailsViewModel(UserDetailsViewModel userDetailsViewModel);
 
     @Binds
     ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

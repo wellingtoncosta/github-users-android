@@ -17,18 +17,18 @@ public interface GitHubApi {
     Observable<List<User>> getUsers();
 
     @GET("users/{username}")
-    Observable<User> getUser(@Path("{username}") String username);
+    Observable<User> getUser(@Path("username") String username);
 
     @GET("users/{username}/followres")
-    Observable<List<User>> getFollowers(@Path("{username}") String username);
+    Observable<List<User>> getFollowers(@Path("username") String username);
 
     @GET("users/{username}/following")
-    Observable<List<User>> getFollowing(@Path("{username}") String username);
+    Observable<List<User>> getFollowing(@Path("username") String username);
 
     @GET("users/{username}/repos")
-    Observable<List<Repo>> getRepos(@Path("{username}") String username);
+    Observable<List<Repo>> getRepos(@Path("username") String username);
 
     @GET("users/{username}/starred")
-    Observable<List<Repo>> getStarredRepos(@Path("{username}") String username);
+    Observable<List<Repo>> getStarredRepos(@Path("username") String username);
 
 }

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">GitHub Users Android</string>
+    <string name="back_button">Voltar</string>
     <string name="load_data_failure">Falha ao tentar carregar os dados</string>
+    <string name="location">Localização</string>
     <string name="search_users">Buscar Usuários</string>
 </resources>
