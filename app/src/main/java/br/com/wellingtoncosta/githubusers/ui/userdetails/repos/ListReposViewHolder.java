@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui.details.repos;
+package br.com.wellingtoncosta.githubusers.ui.userdetails.repos;
 
 import android.view.View;
 

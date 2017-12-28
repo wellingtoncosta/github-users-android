@@ -5,10 +5,10 @@ import android.arch.lifecycle.ViewModelProvider;
 
 import br.com.wellingtoncosta.githubusers.di.keys.ViewModelKey;
 import br.com.wellingtoncosta.githubusers.ui.common.ViewModelFactory;
-import br.com.wellingtoncosta.githubusers.ui.details.UserDetailsViewModel;
-import br.com.wellingtoncosta.githubusers.ui.details.repos.ListReposViewModel;
-import br.com.wellingtoncosta.githubusers.ui.details.starreds.ListStarredReposViewModel;
-import br.com.wellingtoncosta.githubusers.ui.search.SearchUsersViewModel;
+import br.com.wellingtoncosta.githubusers.ui.userdetails.UserDetailsViewModel;
+import br.com.wellingtoncosta.githubusers.ui.userdetails.repos.ListReposViewModel;
+import br.com.wellingtoncosta.githubusers.ui.userdetails.starredrepos.ListStarredReposViewModel;
+import br.com.wellingtoncosta.githubusers.ui.searchuser.SearchUsersViewModel;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;

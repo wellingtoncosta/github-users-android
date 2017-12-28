@@ -1,28 +1,30 @@
-package br.com.wellingtoncosta.githubusers.ui.details;
+package br.com.wellingtoncosta.githubusers.ui.userdetails.starredrepos;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import br.com.wellingtoncosta.githubusers.data.remote.response.Response;
-import br.com.wellingtoncosta.githubusers.domain.model.User;
-import br.com.wellingtoncosta.githubusers.domain.repository.UserRepository;
+import br.com.wellingtoncosta.githubusers.domain.model.Repo;
+import br.com.wellingtoncosta.githubusers.domain.repository.RepoRepository;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @author Wellington Costa on 26/12/2017.
+ * @author Wellington Costa on 27/12/2017.
  */
-public class UserDetailsViewModel extends BaseViewModel<User> {
+public class ListStarredReposViewModel extends BaseViewModel<List<Repo>> {
 
-    private UserRepository userRepository;
+    private RepoRepository repoRepository;
 
     @Inject
-    UserDetailsViewModel(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    ListStarredReposViewModel(RepoRepository repoRepository) {
+        this.repoRepository = repoRepository;
     }
 
-    void loadUserDetails(String username) {
-        userRepository.getUser(username)
+    void loadStarredRepos(String username) {
+        repoRepository.getStarredRepos(username)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(s -> loadingStatus.setValue(true))

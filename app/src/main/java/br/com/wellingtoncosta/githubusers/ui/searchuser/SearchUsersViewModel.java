@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui.search;
+package br.com.wellingtoncosta.githubusers.ui.searchuser;
 
 import java.util.Collections;
 import java.util.List;

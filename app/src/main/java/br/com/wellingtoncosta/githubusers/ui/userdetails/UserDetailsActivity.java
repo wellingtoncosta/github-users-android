@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui.details;
+package br.com.wellingtoncosta.githubusers.ui.userdetails;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -11,8 +11,8 @@ import br.com.wellingtoncosta.githubusers.databinding.ActivityUserDetailsBinding
 import br.com.wellingtoncosta.githubusers.domain.model.User;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseActivity;
 import br.com.wellingtoncosta.githubusers.ui.common.ViewPagerAdapter;
-import br.com.wellingtoncosta.githubusers.ui.details.repos.ListReposFragment;
-import br.com.wellingtoncosta.githubusers.ui.details.starreds.ListStarredReposFragment;
+import br.com.wellingtoncosta.githubusers.ui.userdetails.repos.ListReposFragment;
+import br.com.wellingtoncosta.githubusers.ui.userdetails.starredrepos.ListStarredReposFragment;
 import br.com.wellingtoncosta.githubusers.util.Messages;
 
 /**

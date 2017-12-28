@@ -1,7 +1,7 @@
 package br.com.wellingtoncosta.githubusers.di.modules;
 
-import br.com.wellingtoncosta.githubusers.ui.details.UserDetailsActivity;
-import br.com.wellingtoncosta.githubusers.ui.search.SearchUsersActivity;
+import br.com.wellingtoncosta.githubusers.ui.userdetails.UserDetailsActivity;
+import br.com.wellingtoncosta.githubusers.ui.searchuser.SearchUsersActivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 

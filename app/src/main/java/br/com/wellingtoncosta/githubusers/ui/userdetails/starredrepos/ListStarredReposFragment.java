@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui.details.starreds;
+package br.com.wellingtoncosta.githubusers.ui.userdetails.starredrepos;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;

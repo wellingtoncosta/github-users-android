@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui.details.starreds;
+package br.com.wellingtoncosta.githubusers.ui.userdetails.starredrepos;
 
 import android.view.View;
 

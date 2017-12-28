@@ -6,7 +6,7 @@
     <data>
         <import type="android.view.View" />
         <import type="br.com.wellingtoncosta.githubusers.domain.model.User" />
-        <import type="br.com.wellingtoncosta.githubusers.ui.details.UserDetailsActivity.OnBackButtonClickListener" />
+        <import type="br.com.wellingtoncosta.githubusers.ui.userdetails.UserDetailsActivity.OnBackButtonClickListener" />
         <variable name="user" type="User" />
         <variable name="onBackButtonClickListener" type="OnBackButtonClickListener" />
     </data>

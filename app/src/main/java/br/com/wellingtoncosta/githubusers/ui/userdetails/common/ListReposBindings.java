@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui.details.common;
+package br.com.wellingtoncosta.githubusers.ui.userdetails.common;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import java.util.List;
 
 import br.com.wellingtoncosta.githubusers.domain.model.Repo;
-import br.com.wellingtoncosta.githubusers.ui.details.repos.ListReposAdapter;
-import br.com.wellingtoncosta.githubusers.ui.details.starreds.ListStarredReposAdapter;
+import br.com.wellingtoncosta.githubusers.ui.userdetails.repos.ListReposAdapter;
+import br.com.wellingtoncosta.githubusers.ui.userdetails.starredrepos.ListStarredReposAdapter;
 
 /**
  * @author Wellington Costa on 27/12/2017.

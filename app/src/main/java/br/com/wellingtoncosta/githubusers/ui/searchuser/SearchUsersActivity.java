@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui.search;
+package br.com.wellingtoncosta.githubusers.ui.searchuser;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import br.com.wellingtoncosta.githubusers.R;
 import br.com.wellingtoncosta.githubusers.data.remote.response.Status;
 import br.com.wellingtoncosta.githubusers.databinding.ActivitySearchUsersBinding;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseActivity;
-import br.com.wellingtoncosta.githubusers.ui.details.UserDetailsActivity;
+import br.com.wellingtoncosta.githubusers.ui.userdetails.UserDetailsActivity;
 import br.com.wellingtoncosta.githubusers.util.Messages;
 
 import static android.databinding.DynamicUtil.safeUnbox;

@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui.search;
+package br.com.wellingtoncosta.githubusers.ui.searchuser;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;

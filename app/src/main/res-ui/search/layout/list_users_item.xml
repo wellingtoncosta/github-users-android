@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="br.com.wellingtoncosta.githubusers.ui.search.SearchUsersViewHolder.OnItemClickListener" />
+        <import type="br.com.wellingtoncosta.githubusers.ui.searchuser.SearchUsersViewHolder.OnItemClickListener" />
         <import type="br.com.wellingtoncosta.githubusers.domain.model.User" />
         <variable name="user" type="User" />
         <variable name="onItemClickListener" type="OnItemClickListener" />
