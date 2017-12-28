@@ -18,7 +18,6 @@ public class ListReposBindings {
     public static void loadRepos(RecyclerView recyclerView, List<Repo> repos) {
         if (repos != null) {
             ListReposAdapter adapter = (ListReposAdapter) recyclerView.getAdapter();
-            adapter.getList().clear();
             adapter.getList().addAll(repos);
             adapter.notifyDataSetChanged();
         }
@@ -28,7 +27,6 @@ public class ListReposBindings {
     public static void loadStarredRepos(RecyclerView recyclerView, List<Repo> starredRepos) {
         if (starredRepos != null) {
             ListStarredReposAdapter adapter = (ListStarredReposAdapter) recyclerView.getAdapter();
-            adapter.getList().clear();
             adapter.getList().addAll(starredRepos);
             adapter.notifyDataSetChanged();
         }

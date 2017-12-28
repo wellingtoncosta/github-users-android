@@ -28,12 +28,4 @@ public class UserRepository {
         return api.getUser(username);
     }
 
-    public Observable<List<User>> getFollowers(String username) {
-        return api.getFollowers(username);
-    }
-
-    public Observable<List<User>> getFollowing(String username) {
-        return api.getFollowing(username);
-    }
-
 }

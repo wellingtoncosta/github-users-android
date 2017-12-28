@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,8 @@ import br.com.wellingtoncosta.githubusers.databinding.ActivitySearchUsersBinding
 import br.com.wellingtoncosta.githubusers.ui.base.BaseActivity;
 import br.com.wellingtoncosta.githubusers.ui.details.UserDetailsActivity;
 import br.com.wellingtoncosta.githubusers.util.Messages;
+
+import static android.databinding.DynamicUtil.safeUnbox;
 
 /**
  * @author Wellington Costa on 26/12/2017.
@@ -36,10 +39,19 @@ public class SearchUsersActivity extends BaseActivity<SearchUsersViewModel> {
     @Override
     public void setupViews() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search_users);
-        binding.includeContent.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        setupRecyclerView();
+        setupSearchView();
+    }
+
+    private void setupRecyclerView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        int orientation = layoutManager.getOrientation();
+
+        binding.includeContent.recyclerView.setHasFixedSize(true);
+        binding.includeContent.recyclerView.setLayoutManager(layoutManager);
+        binding.includeContent.recyclerView.addItemDecoration(new DividerItemDecoration(this, orientation));
         binding.includeContent.recyclerView.setAdapter(new SearchUsersAdapter(onItemClickListener));
         binding.includeContent.swipeContainer.setOnRefreshListener(viewModel::loadUsers);
-        setupSearchView();
     }
 
     private void setupSearchView() {
@@ -114,7 +126,7 @@ public class SearchUsersActivity extends BaseActivity<SearchUsersViewModel> {
     public void observeLoadingStatus() {
         viewModel.getLoadingStatus().observe(
                 this,
-                isLoading  -> binding.includeContent.swipeContainer.setRefreshing(isLoading == null ? false : isLoading)
+                isLoading  -> binding.includeContent.swipeContainer.setRefreshing(safeUnbox(isLoading))
         );
     }
 
