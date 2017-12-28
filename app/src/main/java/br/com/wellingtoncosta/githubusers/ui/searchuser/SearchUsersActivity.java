@@ -91,8 +91,11 @@ public class SearchUsersActivity extends BaseActivity<SearchUsersViewModel> {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
         observeLoadingStatus();
         observeResponse();
+
+        viewModel.loadUsers();
     }
 
     @Override
@@ -101,9 +104,8 @@ public class SearchUsersActivity extends BaseActivity<SearchUsersViewModel> {
 
         if (binding.includeToolbar.searchView.isSearchOpen()) {
             binding.includeToolbar.searchView.closeSearch();
+            viewModel.loadUsers();
         }
-
-        viewModel.loadUsers();
     }
 
     @Override
