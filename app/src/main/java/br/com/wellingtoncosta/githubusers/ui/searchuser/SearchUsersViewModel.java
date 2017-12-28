@@ -9,25 +9,27 @@ import br.com.wellingtoncosta.githubusers.data.remote.response.Response;
 import br.com.wellingtoncosta.githubusers.domain.model.User;
 import br.com.wellingtoncosta.githubusers.domain.repository.UserRepository;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseViewModel;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import br.com.wellingtoncosta.githubusers.util.scheduler.BaseScheduler;
 
 /**
  * @author Wellington Costa on 26/12/2017.
  */
 public class SearchUsersViewModel extends BaseViewModel<List<User>> {
 
+    private BaseScheduler scheduler;
+
     private UserRepository repository;
 
     @Inject
-    SearchUsersViewModel(UserRepository repository) {
+    public SearchUsersViewModel(BaseScheduler scheduler, UserRepository repository) {
+        this.scheduler = scheduler;
         this.repository = repository;
     }
 
-    void loadUsers() {
+    public void loadUsers() {
         repository.getUsers()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(scheduler.io())
+                .observeOn(scheduler.ui())
                 .doOnSubscribe(s -> loadingStatus.setValue(true))
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(
@@ -36,10 +38,10 @@ public class SearchUsersViewModel extends BaseViewModel<List<User>> {
                 );
     }
 
-    void loadUser(String username) {
+    public void loadUser(String username) {
         repository.getUser(username)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(scheduler.io())
+                .observeOn(scheduler.ui())
                 .doOnSubscribe(s -> loadingStatus.setValue(true))
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(

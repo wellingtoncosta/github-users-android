@@ -5,6 +5,8 @@ import javax.inject.Singleton;
 import br.com.wellingtoncosta.githubusers.data.remote.GitHubApi;
 import br.com.wellingtoncosta.githubusers.domain.repository.RepoRepository;
 import br.com.wellingtoncosta.githubusers.domain.repository.UserRepository;
+import br.com.wellingtoncosta.githubusers.util.scheduler.BaseScheduler;
+import br.com.wellingtoncosta.githubusers.util.scheduler.SchedulerProvider;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -31,6 +33,12 @@ public class AppModule {
     @Singleton
     RepoRepository provideRepoRepository(GitHubApi api) {
         return new RepoRepository(api);
+    }
+
+    @Provides
+    @Singleton
+    BaseScheduler provideScheduler() {
+        return new SchedulerProvider();
     }
 
 }

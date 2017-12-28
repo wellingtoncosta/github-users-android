@@ -6,25 +6,27 @@ import br.com.wellingtoncosta.githubusers.data.remote.response.Response;
 import br.com.wellingtoncosta.githubusers.domain.model.User;
 import br.com.wellingtoncosta.githubusers.domain.repository.UserRepository;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseViewModel;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import br.com.wellingtoncosta.githubusers.util.scheduler.BaseScheduler;
 
 /**
  * @author Wellington Costa on 26/12/2017.
  */
 public class UserDetailsViewModel extends BaseViewModel<User> {
 
+    private BaseScheduler scheduler;
+
     private UserRepository userRepository;
 
     @Inject
-    UserDetailsViewModel(UserRepository userRepository) {
+    public UserDetailsViewModel(BaseScheduler scheduler, UserRepository userRepository) {
+        this.scheduler = scheduler;
         this.userRepository = userRepository;
     }
 
-    void loadUserDetails(String username) {
+    public void loadUserDetails(String username) {
         userRepository.getUser(username)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(scheduler.io())
+                .observeOn(scheduler.ui())
                 .doOnSubscribe(s -> loadingStatus.setValue(true))
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(

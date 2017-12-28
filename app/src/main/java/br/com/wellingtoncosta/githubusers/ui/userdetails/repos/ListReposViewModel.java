@@ -8,25 +8,27 @@ import br.com.wellingtoncosta.githubusers.data.remote.response.Response;
 import br.com.wellingtoncosta.githubusers.domain.model.Repo;
 import br.com.wellingtoncosta.githubusers.domain.repository.RepoRepository;
 import br.com.wellingtoncosta.githubusers.ui.base.BaseViewModel;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import br.com.wellingtoncosta.githubusers.util.scheduler.BaseScheduler;
 
 /**
  * @author Wellington Costa on 27/12/2017.
  */
 public class ListReposViewModel extends BaseViewModel<List<Repo>> {
 
+    private BaseScheduler scheduler;
+
     private RepoRepository repoRepository;
 
     @Inject
-    ListReposViewModel(RepoRepository repoRepository) {
+    public ListReposViewModel(BaseScheduler scheduler, RepoRepository repoRepository) {
+        this.scheduler = scheduler;
         this.repoRepository = repoRepository;
     }
 
-    void loadRepos(String username) {
+    public void loadRepos(String username) {
         repoRepository.getRepos(username)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(scheduler.io())
+                .observeOn(scheduler.ui())
                 .doOnSubscribe(s -> loadingStatus.setValue(true))
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(
