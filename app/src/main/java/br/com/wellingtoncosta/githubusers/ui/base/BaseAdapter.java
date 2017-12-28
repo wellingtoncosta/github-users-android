@@ -49,4 +49,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
         return list;
     }
 
+    public void setList(List<T> list) {
+        this.list = list;
+    }
 }

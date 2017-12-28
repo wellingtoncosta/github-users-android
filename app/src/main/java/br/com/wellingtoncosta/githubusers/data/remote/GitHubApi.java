@@ -7,6 +7,7 @@ import br.com.wellingtoncosta.githubusers.domain.model.User;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * @author Wellington Costa on 26/12/2017.
@@ -20,9 +21,9 @@ public interface GitHubApi {
     Observable<User> getUser(@Path("username") String username);
 
     @GET("users/{username}/repos")
-    Observable<List<Repo>> getRepos(@Path("username") String username);
+    Observable<List<Repo>> getRepos(@Path("username") String username, @Query("page") int page);
 
-    @GET("users/{username}/repos")
-    Observable<List<Repo>> getStarredRepos(@Path("username") String username);
+    @GET("users/{username}/starred")
+    Observable<List<Repo>> getStarredRepos(@Path("username") String username, @Query("page") int page);
 
 }

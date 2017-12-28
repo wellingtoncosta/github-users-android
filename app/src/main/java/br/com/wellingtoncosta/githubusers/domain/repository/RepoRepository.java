@@ -20,12 +20,12 @@ public class RepoRepository {
         this.api = api;
     }
 
-    public Observable<List<Repo>> getRepos(String username) {
-        return api.getRepos(username);
+    public Observable<List<Repo>> getRepos(String username, int page) {
+        return api.getRepos(username, page);
     }
 
-    public Observable<List<Repo>> getStarredRepos(String username) {
-        return api.getStarredRepos(username);
+    public Observable<List<Repo>> getStarredRepos(String username, int page) {
+        return api.getStarredRepos(username, page);
     }
 
 }

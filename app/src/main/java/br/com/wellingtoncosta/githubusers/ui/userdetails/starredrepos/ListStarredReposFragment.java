@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import javax.inject.Inject;
 import br.com.wellingtoncosta.githubusers.R;
 import br.com.wellingtoncosta.githubusers.data.remote.response.Status;
 import br.com.wellingtoncosta.githubusers.databinding.FragmentListStarredReposBinding;
+import br.com.wellingtoncosta.githubusers.ui.common.EndlessRecyclerViewScrollListener;
 import br.com.wellingtoncosta.githubusers.util.Messages;
 import dagger.android.support.DaggerFragment;
 
@@ -72,16 +74,29 @@ public class ListStarredReposFragment extends DaggerFragment {
     }
 
     private void setupRecyclerView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        binding.recyclerView.setLayoutManager(layoutManager);
-        binding.recyclerView.setHasFixedSize(true);
-        binding.recyclerView.setAdapter(new ListStarredReposAdapter());
-
         if (getActivity() != null) {
-            binding.recyclerView.addItemDecoration(new DividerItemDecoration(
-                    getActivity(),
-                    layoutManager.getOrientation()
-            ));
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            binding.recyclerView.setLayoutManager(layoutManager);
+            binding.recyclerView.setHasFixedSize(true);
+            binding.recyclerView.setAdapter(new ListStarredReposAdapter());
+
+            if (getActivity() != null) {
+                binding.recyclerView.addItemDecoration(new DividerItemDecoration(
+                        getActivity(),
+                        layoutManager.getOrientation()
+                ));
+            }
+
+            binding.recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
+                @Override
+                public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                    if (getArguments() != null) {
+                        String username = getArguments().getString("username");
+                        viewModel.setCurrentPage(page);
+                        viewModel.loadStarredRepos(username);
+                    }
+                }
+            });
         }
     }
 

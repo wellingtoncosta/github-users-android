@@ -14,7 +14,6 @@ import java.util.List;
 import br.com.wellingtoncosta.githubusers.data.remote.response.Response;
 import br.com.wellingtoncosta.githubusers.domain.model.Repo;
 import br.com.wellingtoncosta.githubusers.domain.repository.RepoRepository;
-import br.com.wellingtoncosta.githubusers.ui.userdetails.repos.ListReposViewModel;
 import br.com.wellingtoncosta.githubusers.ui.userdetails.starredrepos.ListStarredReposViewModel;
 import br.com.wellingtoncosta.githubusers.util.scheduler.TestSchedulerProvider;
 import io.reactivex.schedulers.TestScheduler;
@@ -41,13 +40,15 @@ public class ListStarredReposViewModelTest {
 
     private static final String USERNAME_TEST = "WellingtonCosta";
 
+    private static final int PAGE = 1;
+
     @Before
     public void setUp(){
         repoRepository = mock(RepoRepository.class);
 
         listStarredReposViewModel = new ListStarredReposViewModel(new TestSchedulerProvider(new TestScheduler()), repoRepository);
 
-        when(repoRepository.getStarredRepos(USERNAME_TEST)).thenReturn(just(createStarredRepos()));
+        when(repoRepository.getStarredRepos(USERNAME_TEST, PAGE)).thenReturn(just(createStarredRepos()));
     }
 
     @Test
@@ -64,7 +65,7 @@ public class ListStarredReposViewModelTest {
         Observer<Response<List<Repo>>> result = mock(Observer.class);
         listStarredReposViewModel.getResponse().observeForever(result);
         listStarredReposViewModel.loadStarredRepos(USERNAME_TEST);
-        verify(repoRepository).getStarredRepos(USERNAME_TEST);
+        verify(repoRepository).getStarredRepos(USERNAME_TEST, PAGE);
     }
 
 }

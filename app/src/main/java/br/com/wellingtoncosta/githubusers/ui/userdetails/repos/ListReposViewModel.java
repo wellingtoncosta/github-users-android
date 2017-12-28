@@ -19,6 +19,8 @@ public class ListReposViewModel extends BaseViewModel<List<Repo>> {
 
     private RepoRepository repoRepository;
 
+    private int currentPage = 1;
+
     @Inject
     public ListReposViewModel(BaseScheduler scheduler, RepoRepository repoRepository) {
         this.scheduler = scheduler;
@@ -26,7 +28,7 @@ public class ListReposViewModel extends BaseViewModel<List<Repo>> {
     }
 
     public void loadRepos(String username) {
-        repoRepository.getRepos(username)
+        repoRepository.getRepos(username, currentPage)
                 .subscribeOn(scheduler.io())
                 .observeOn(scheduler.ui())
                 .doOnSubscribe(s -> loadingStatus.setValue(true))
@@ -37,4 +39,7 @@ public class ListReposViewModel extends BaseViewModel<List<Repo>> {
                 );
     }
 
+    void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
 }

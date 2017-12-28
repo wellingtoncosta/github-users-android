@@ -40,13 +40,15 @@ public class ListReposViewModelTest {
 
     private static final String USERNAME_TEST = "WellingtonCosta";
 
+    private static final int PAGE = 1;
+
     @Before
     public void setUp(){
         repoRepository = mock(RepoRepository.class);
 
         listReposViewModel = new ListReposViewModel(new TestSchedulerProvider(new TestScheduler()), repoRepository);
 
-        when(repoRepository.getRepos(USERNAME_TEST)).thenReturn(just(createRepos()));
+        when(repoRepository.getRepos(USERNAME_TEST, PAGE)).thenReturn(just(createRepos()));
     }
 
     @Test
@@ -63,7 +65,7 @@ public class ListReposViewModelTest {
         Observer<Response<List<Repo>>> result = mock(Observer.class);
         listReposViewModel.getResponse().observeForever(result);
         listReposViewModel.loadRepos(USERNAME_TEST);
-        verify(repoRepository).getRepos(USERNAME_TEST);
+        verify(repoRepository).getRepos(USERNAME_TEST, PAGE);
     }
 
 }

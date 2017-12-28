@@ -31,24 +31,26 @@ public class RepoRepositoryTesst {
 
     private static final String USERNAME_TEST = "WellingtonCosta";
 
+    private static final int PAGE = 1;
+
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
 
-        when(repoRepository.getRepos(USERNAME_TEST)).thenReturn(just(createRepos()));
-        when(repoRepository.getStarredRepos(USERNAME_TEST)).thenReturn(just(createStarredRepos()));
+        when(repoRepository.getRepos(USERNAME_TEST, PAGE)).thenReturn(just(createRepos()));
+        when(repoRepository.getStarredRepos(USERNAME_TEST, PAGE)).thenReturn(just(createStarredRepos()));
     }
 
     @Test
     public void getReposByUsernameWithSuccess() {
-        repoRepository.getRepos(USERNAME_TEST);
-        verify(api).getRepos(USERNAME_TEST);
+        repoRepository.getRepos(USERNAME_TEST, PAGE);
+        verify(api).getRepos(USERNAME_TEST, PAGE);
     }
 
     @Test
     public void getStarredReposByUsernameWithSuccess() {
-        repoRepository.getStarredRepos(USERNAME_TEST);
-        verify(api).getStarredRepos(USERNAME_TEST);
+        repoRepository.getStarredRepos(USERNAME_TEST, PAGE);
+        verify(api).getStarredRepos(USERNAME_TEST, PAGE);
     }
 
 }
