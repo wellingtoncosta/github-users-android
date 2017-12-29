@@ -25,6 +25,17 @@ public class Repo {
     @SerializedName("forks_count")
     private Long forksCount;
 
+    public Repo() { }
+
+    public Repo(Long id, String name, String fullName, String language, Long stargazersCount, Long forksCount) {
+        this.id = id;
+        this.name = name;
+        this.fullName = fullName;
+        this.language = language;
+        this.stargazersCount = stargazersCount;
+        this.forksCount = forksCount;
+    }
+
     public Long getId() {
         return id;
     }

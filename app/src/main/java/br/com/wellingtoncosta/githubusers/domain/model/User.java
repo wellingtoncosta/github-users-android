@@ -22,7 +22,15 @@ public class User {
     @SerializedName("location")
     private String location;
 
+    public User() { }
 
+    public User(Long id, String avatarUrl, String name, String username, String location) {
+        this.id = id;
+        this.avatarUrl = avatarUrl;
+        this.name = name;
+        this.username = username;
+        this.location = location;
+    }
 
     public Long getId() {
         return id;

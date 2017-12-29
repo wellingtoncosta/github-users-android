@@ -31,6 +31,7 @@
                 app:titleEnabled="false">
 
                 <android.support.constraint.ConstraintLayout
+                    android:id="@+id/user_details"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="24dp"
@@ -45,7 +46,7 @@
                         android:layout_width="96dp"
                         android:layout_height="96dp"
                         android:layout_marginTop="60dp"
-                        tools:placeholderImage="@drawable/ic_launcher"
+                        tools:failureImage=""
                         app:load_user_avatar="@{user}"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="parent" />
@@ -75,7 +76,6 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
-                        android:visibility="@{user.username != null ? View.VISIBLE : View.INVISIBLE}"
                         android:text='@{"@" + user.username}'
                         app:layout_constraintLeft_toRightOf="@+id/image"
                         app:layout_constraintTop_toBottomOf="@+id/name"

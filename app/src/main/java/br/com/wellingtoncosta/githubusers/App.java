@@ -1,4 +1,4 @@
-package br.com.wellingtoncosta.githubusers.ui;
+package br.com.wellingtoncosta.githubusers;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 

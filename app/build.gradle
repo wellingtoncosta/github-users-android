@@ -9,7 +9,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "br.com.wellingtoncosta.githubusers.TestAppRunner"
         vectorDrawables.useSupportLibrary = true
         buildConfigField("String", "API_URL", "\"https://api.github.com/\"")
     }
@@ -39,5 +39,8 @@ android {
                     'src/main/res-ui/details'
             ]
         }
+    }
+    testOptions {
+        animationsDisabled = true
     }
 }

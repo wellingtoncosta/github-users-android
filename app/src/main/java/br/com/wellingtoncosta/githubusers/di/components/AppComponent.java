@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import br.com.wellingtoncosta.githubusers.di.modules.ActivityBuildersModule;
 import br.com.wellingtoncosta.githubusers.di.modules.AppModule;
 import br.com.wellingtoncosta.githubusers.di.modules.NetworkModule;
-import br.com.wellingtoncosta.githubusers.ui.App;
+import br.com.wellingtoncosta.githubusers.App;
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;

@@ -32,10 +32,23 @@ dependencies {
     // Material Search View
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
 
-    // Unit and UI Tests
+    // Unit Tests
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.13.0'
     testImplementation 'android.arch.core:core-testing:1.0.0'
+
+    // Android Tests
+    androidTestImplementation 'org.mockito:mockito-android:2.13.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.13'
+    androidTestAnnotationProcessor 'com.google.dagger:dagger-android-processor:2.13'
 }

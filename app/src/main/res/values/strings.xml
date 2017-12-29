@@ -10,4 +10,5 @@
     <string name="server_connection_error">Falha na comunicação com o servidor</string>
     <string name="stars">Estrelas</string>
     <string name="star_icon">Icone de Estrela</string>
+    <string name="user_not_found">Usuário não encontrado</string>
 </resources>

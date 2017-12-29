@@ -19,7 +19,15 @@ public class Messages {
         if (throwable instanceof UnknownHostException) {
             return R.string.server_connection_error;
         } else if (throwable instanceof HttpException) {
-            return R.string.limit_requests_exceeded;
+            HttpException httpException = (HttpException) throwable;
+
+            if (httpException.code() == 403) {
+                return R.string.limit_requests_exceeded;
+            } else if (httpException.code() == 404) {
+                return R.string.user_not_found;
+            } else {
+                return R.string.load_data_failure;
+            }
         } else {
             return R.string.load_data_failure;
         }
